@@ -194,21 +194,21 @@ function App(){
 
 
   return(
+  <>
+  <div className="top-nav">
+      <SignedOut>
+        <SignInButton mode="modal">
+          <button className="login-btn">登入以同步資料</button>
+        </SignInButton>
+      </SignedOut>
+      <SignedIn>
+        <div className="user-profile">
+          <span>你好，{user?.firstName}</span>
+          <UserButton afterSignOutUrl="/" />
+        </div>
+      </SignedIn>
+    </div>
   <div className='container'>
-    {/* 右上角放個登入控制區 */}
-      <div style={{ textAlign: 'right', marginBottom: '20px' }}>
-        <SignedOut>
-          <SignInButton mode="modal">
-            <button className="inputgroup button">登入以同步資料</button>
-          </SignInButton>
-        </SignedOut>
-        <SignedIn>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '10px' }}>
-            <span>你好，{user?.firstName}</span>
-            <UserButton afterSignOutUrl="/" />
-          </div>
-        </SignedIn>
-      </div>
 
       <h1>To do list</h1>
 
@@ -265,7 +265,7 @@ function App(){
     
     
 
-  </div>)
+  </div></>)
 }
 
 export default App

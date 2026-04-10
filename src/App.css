@@ -1,4 +1,48 @@
 /* =========================================
+   右上角登入控制區 (Top Nav)
+   ========================================= */
+.top-nav {
+  position: absolute; /* 絕對定位：脫離原本的排版排隊規則 */
+  top: 25px;          /* 距離上面 25px */
+  right: 40px;        /* 距離右邊 40px */
+  z-index: 100;       /* 確保它疊在所有東西的最上層 */
+}
+
+/* 獨立出來的登入按鈕 */
+.login-btn {
+  background-color: #8661C1; /* 深紫色 */
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+  box-shadow: 0 4px 12px rgba(134, 97, 193, 0.3); /* 幫按鈕加上一點夢幻陰影 */
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #BE97C6; /* Hover 變成粉紫色 */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(190, 151, 198, 0.4);
+}
+
+/* 登入後的使用者資料區 (包含名字和大頭貼) */
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #ffffff;
+  padding: 8px 12px 8px 20px; /* 左邊留多一點空間給文字 */
+  border-radius: 30px;
+  box-shadow: 0 4px 15px rgba(75, 82, 103, 0.08); /* 白色卡片質感的陰影 */
+  color: #4B5267;
+  font-weight: bold;
+}
+
+
+/* =========================================
    全域與基礎設定
    ========================================= */
 body {
