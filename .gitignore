@@ -1,9 +1,4 @@
-.env
-
-
-
-
-# Logs
+# Logs (系統產生的錯誤日誌，不需要上傳)
 logs
 *.log
 npm-debug.log*
@@ -12,12 +7,13 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# node_modules (超級大怪物！幾萬個套件檔案，絕對不能傳)
 node_modules
 dist
 dist-ssr
 *.local
 
-# Editor directories and files
+# Editor directories and files (編輯器的個人設定檔，例如 VS Code 或 Mac 系統檔)
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -28,4 +24,9 @@ dist-ssr
 *.sln
 *.sw?
 
-
+# 環境變數 (你的隱形保險箱，絕對不能上傳！！！)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
