@@ -1,11 +1,14 @@
 import { useState , useEffect,useRef} from 'react'
 import './App.css'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
+import { useUser } from '@clerk/clerk-react'
 
 
 function App(){
+  const { user } = useUser()
   // const API_URL='http://localhost:3000/api/todos'
   const API_URL=import.meta.env.VITE_API_URL
+  const [userId,setuserId]=useState('')
   const [text,settext]=useState('')
   const [message,setmessage]=useState([])
   const [editingtodo,seteditingtodo]=useState(null)
@@ -76,7 +79,7 @@ function App(){
   useEffect(()=>{
     const fetchtodo=async()=>{
       try{
-      const response=await fetch(API_URL)
+      const response=await fetch(API_URL,{headers:{'userid':user.id}})
       const data=await response.json()
       setmessage(data)
       console.log(data)
