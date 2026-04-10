@@ -20,6 +20,8 @@ function App(){
   const [editingtodo,seteditingtodo]=useState(null)
   const notifiedid=useRef(new Set())
   const [animationParent] = useAutoAnimate()
+
+  
   
 
   const formatTime = (timeString) => {
@@ -82,19 +84,20 @@ function App(){
     return ()=>{clearInterval(timer)}
   },[message])
 
-  useEffect(()=>{
-    const fetchtodo=async()=>{
-      try{
-      const response=await fetch(API_URL,{headers:{'userId':user.id}})
-      const data=await response.json()
-      setmessage(data)
-      console.log(data)
-      }catch (error){
-      console.error('抓取資料失敗',error)
-      }}
-    fetchtodo()    
+  useEffect(() => {
+    const fetchtodo = async () => {
+      if (!user) return; // 💡 攔截器：如果還沒登入，就不要去跟後端要資料！
+
+      try {
+        const response = await fetch(API_URL, { headers: { 'userid': user.id } })
+        const data = await response.json()
+        setmessage(data)
+      } catch (error) {
+        console.error('抓取資料失敗', error)
+      }
     }
-    ,[])
+    fetchtodo()    
+  }, [user]);
 
   const escpressed=(e)=>{
     if (e.key=='Escape'){
@@ -111,7 +114,7 @@ function App(){
     }
     try{
       const response=await fetch(API_URL,{method:'POST',
-        headers:{'Content-Type': 'application/json'},
+        headers:{'Content-Type': 'application/json','userid':user.id},
         body:JSON.stringify({content:text})
       })
       const newtodo=await response.json()
@@ -130,7 +133,7 @@ function App(){
 
   const deletepressed= async(id)=>{
     try{
-      await fetch(`${API_URL}/:${id}`,{method:'DELETE'})
+      await fetch(`${API_URL}/${id}`,{method:'DELETE'})
       const newmessage=(
     message.filter((item)=>item._id!=id))
     setmessage(newmessage)
@@ -142,7 +145,7 @@ function App(){
 
   const savedetail= async (item)=>{
     try{
-      await fetch(`${API_URL}/:${item._id}`,{method:'PUT',
+      await fetch(`${API_URL}/${item._id}`,{method:'PUT',
         headers:{'Content-Type': 'application/json'}
       ,body:JSON.stringify(item)
     })
