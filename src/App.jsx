@@ -5,7 +5,7 @@ import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 function App(){
   // const API_URL='http://localhost:3000/api/todos'
-  const API_URL='https://todo-backend-49nv.onrender.com'
+  const API_URL='https://todo-backend-49nv.onrender.com/api/todos'
   const [text,settext]=useState('')
   const [message,setmessage]=useState([])
   const [editingtodo,seteditingtodo]=useState(null)
@@ -76,7 +76,7 @@ function App(){
   useEffect(()=>{
     const fetchtodo=async()=>{
       try{
-      const response=await fetch(`${API_URL}/api/todos`)
+      const response=await fetch(API_URL)
       const data=await response.json()
       setmessage(data)
       console.log(data)
