@@ -5,7 +5,7 @@ import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 function App(){
   // const API_URL='http://localhost:3000/api/todos'
-  const API_URL='https://todo-backend-49nv.onrender.com/api/todos'
+  const API_URL=import.meta.env.VITE_API_URL
   const [text,settext]=useState('')
   const [message,setmessage]=useState([])
   const [editingtodo,seteditingtodo]=useState(null)
