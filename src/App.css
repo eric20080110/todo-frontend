@@ -1,0 +1,256 @@
+/* =========================================
+   全域與基礎設定
+   ========================================= */
+body {
+  /* 背景使用極淺的灰藍色，凸顯白色的主卡片 */
+  background-color: #f7f8fa; 
+  color: #4B5267; /* 預設文字使用深灰藍 */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* =========================================
+   主容器 (To do list 卡片)
+   ========================================= */
+.container {
+  width: 100%;
+  max-width: 600px;
+  background-color: #ffffff;
+  border-radius: 24px;
+  padding: 40px 30px;
+  /* 柔和的立體陰影 */
+  box-shadow: 0 10px 40px rgba(75, 82, 103, 0.08); 
+  /* 頂部加入深紫色的裝飾線 */
+  border-top: 8px solid #8661C1; 
+}
+
+.container > h1 {
+  text-align: center;
+  color: #8661C1; /* 深紫色標題 */
+  font-weight: 800;
+  margin-top: 0;
+  margin-bottom: 30px;
+  letter-spacing: 2px;
+}
+
+/* =========================================
+   輸入區 (Google 搜尋框風格)
+   ========================================= */
+.inputgroup {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: 2px solid #eaecef;
+  border-radius: 30px; /* 膠囊形狀 */
+  padding: 6px 8px 6px 20px;
+  margin-bottom: 35px;
+  transition: all 0.3s ease;
+}
+
+/* 點擊輸入框時，邊框變成粉紫色並發光 */
+.inputgroup:focus-within {
+  border-color: #BE97C6;
+  box-shadow: 0 4px 15px rgba(190, 151, 198, 0.25);
+}
+
+.inputgroup input {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #4B5267; /* 深灰藍文字 */
+  background: transparent;
+}
+
+.inputgroup input::placeholder {
+  color: #b0b4c0;
+}
+
+.inputgroup button {
+  background-color: #8661C1; /* 深紫色按鈕 */
+  color: white;
+  border: none;
+  border-radius: 24px;
+  padding: 10px 22px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.inputgroup button:hover {
+  background-color: #BE97C6; /* Hover 變成粉紫色 */
+  transform: translateY(-1px);
+}
+
+.inputgroup button:active {
+  transform: scale(0.95);
+}
+
+/* =========================================
+   待辦事項列表區
+   ========================================= */
+.todogroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.todorow {
+  display: flex;
+  align-items: center;
+  background-color: #fdfdfd;
+  border: 1px solid #eaecef;
+  border-radius: 16px;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.todorow:hover {
+  background-color: #ffffff;
+  border-color: #BE97C6; /* Hover 邊框變粉紫 */
+  box-shadow: 0 4px 12px rgba(190, 151, 198, 0.15);
+  transform: translateY(-2px);
+}
+
+/* 打勾框美化 */
+.todorow input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  accent-color: #A7C4B5; /* 鼠尾草綠的打勾狀態 */
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+/* 文字與時間資訊 */
+.todo-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.todo-info h1.todo-text {
+  margin: 0;
+  font-size: 18px;
+  color: #4B5267;
+  transition: color 0.3s ease;
+}
+
+.todo-info .timetag {
+  font-size: 13px;
+  color: #8da1b5;
+  margin-top: 4px;
+}
+
+/* 完成狀態：文字加上刪除線，並變成鼠尾草綠 */
+.todo-text.checked {
+  text-decoration: line-through;
+  color: #A7C4B5 !important; 
+}
+
+/* 刪除按鈕 */
+.deletebutton {
+  background-color: #EFBCD5; /* 柔粉色 */
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.deletebutton:hover {
+  background-color: #e599bc; /* Hover 時粉色變深一點 */
+  transform: scale(1.05);
+}
+
+/* =========================================
+   彈跳編輯視窗 (Modal)
+   ========================================= */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  /* 使用深灰藍作為遮罩，並加上現代感的毛玻璃效果 */
+  background-color: rgba(75, 82, 103, 0.5); 
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background-color: #ffffff;
+  padding: 35px;
+  border-radius: 24px;
+  width: 90%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+  border-top: 6px solid #BE97C6; /* 粉紫色的頂部點綴 */
+}
+
+.popup-content h2 {
+  margin: 0;
+  color: #8661C1;
+  font-size: 22px;
+}
+
+/* 彈跳視窗內的輸入框 */
+.popup-content textarea,
+.popup-content input[type="datetime-local"] {
+  width: 100%;
+  box-sizing: border-box; /* 確保 padding 不會撐破寬度 */
+  padding: 14px;
+  border: 2px solid #eaecef;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 15px;
+  color: #4B5267;
+  background-color: #fcfcfc;
+  transition: border-color 0.3s;
+}
+
+.popup-content textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.popup-content textarea:focus,
+.popup-content input[type="datetime-local"]:focus {
+  outline: none;
+  border-color: #BE97C6; /* Focus 時變成粉紫色 */
+  background-color: #fff;
+}
+
+/* 儲存並關閉按鈕 */
+.closedetailbutton {
+  background-color: #8661C1;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+  margin-top: 5px;
+}
+
+.closedetailbutton:hover {
+  background-color: #BE97C6;
+}
+.closedetailbutton:active {
+  transform: scale(0.98);
+}
