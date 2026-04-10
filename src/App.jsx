@@ -121,7 +121,7 @@ function App(){
 
   const deletepressed= async(id)=>{
     try{
-      await fetch(`${API_URL}/${id}`,{method:'DELETE'})
+      await fetch(`${API_URL}/:${id}`,{method:'DELETE'})
       const newmessage=(
     message.filter((item)=>item._id!=id))
     setmessage(newmessage)
@@ -133,7 +133,7 @@ function App(){
 
   const savedetail= async (item)=>{
     try{
-      await fetch(`${API_URL}/${item._id}`,{method:'PUT',
+      await fetch(`${API_URL}/:${item._id}`,{method:'PUT',
         headers:{'Content-Type': 'application/json'}
       ,body:JSON.stringify(item)
     })
