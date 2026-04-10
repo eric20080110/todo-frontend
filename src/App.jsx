@@ -76,7 +76,7 @@ function App(){
   useEffect(()=>{
     const fetchtodo=async()=>{
       try{
-      const response=await fetch(API_URL)
+      const response=await fetch(`${API_URL}/api/todos`)
       const data=await response.json()
       setmessage(data)
       console.log(data)
