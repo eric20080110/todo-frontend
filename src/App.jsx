@@ -1,7 +1,13 @@
 import { useState , useEffect,useRef} from 'react'
 import './App.css'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
-import { useUser } from '@clerk/clerk-react'
+import { 
+  SignedIn, 
+  SignedOut, 
+  SignInButton, 
+  UserButton,
+  useUser 
+} from "@clerk/clerk-react";
 
 
 function App(){
@@ -79,7 +85,7 @@ function App(){
   useEffect(()=>{
     const fetchtodo=async()=>{
       try{
-      const response=await fetch(API_URL,{headers:{'userid':user.id}})
+      const response=await fetch(API_URL,{headers:{'userId':user.id}})
       const data=await response.json()
       setmessage(data)
       console.log(data)
@@ -186,8 +192,25 @@ function App(){
 
   return(
   <div className='container'>
-    <h1>To do list</h1>
-    <div className='inputgroup'>
+    {/* 右上角放個登入控制區 */}
+      <div style={{ textAlign: 'right', marginBottom: '20px' }}>
+        <SignedOut>
+          <SignInButton mode="modal">
+            <button className="inputgroup button">登入以同步資料</button>
+          </SignInButton>
+        </SignedOut>
+        <SignedIn>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '10px' }}>
+            <span>你好，{user?.firstName}</span>
+            <UserButton afterSignOutUrl="/" />
+          </div>
+        </SignedIn>
+      </div>
+
+      <h1>To do list</h1>
+
+      <SignedIn>
+        <div className='inputgroup'>
       <input type="text" value={text} onChange={textinput} onKeyDown={enterpressed}/>
       <button onClick={sendclicked}>send</button>
     </div>
@@ -225,6 +248,17 @@ function App(){
       </div>
 
     </div>}
+      </SignedIn>
+
+      <SignedOut>
+        <div style={{ textAlign: 'center', padding: '50px' }}>
+          <h2>歡迎使用！</h2>
+          <p>請先登入以查看您的專屬待辦清單。</p>
+        </div>
+      </SignedOut>
+
+
+    
     
     
 
