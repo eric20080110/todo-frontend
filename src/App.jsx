@@ -86,7 +86,7 @@ function App(){
 
   useEffect(() => {
     const fetchtodo = async () => {
-      if (!user) return; // 💡 攔截器：如果還沒登入，就不要去跟後端要資料！
+      if (!user) return; 
 
       try {
         const response = await fetch(API_URL, { headers: { 'userid': user.id } })
